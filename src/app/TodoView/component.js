@@ -1,17 +1,22 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 
-export default class TodoView extends Component {
-  constructor(props) {
-    super(props);
-    console.log(props)
-  }
+class TodoView extends Component {
   render() {
-    console.log(this.props)
     return (
       <div>
-        hello
-        hi
+        <button
+          onClick={() => this.props.createTodo('some new todo')}
+        >Create</button>
+      <h1>{this.props.isCreatingTodo ? 'Creating' : 'Done'}</h1>
       </div>
     )
   }
 }
+
+TodoView.propTypes = {
+  isCreatingTodo: PropTypes.bool.isRequired
+}
+
+
+export default TodoView;

@@ -1,11 +1,15 @@
 import { connect } from 'react-redux'
 import component from './component'
-// import { actionCreator } from './actions';
+import { createTodo } from './actions';
 
-const mapStateToProps = (state, ownProps) => ({...state})
+const mapStateToProps = (state, ownProps) => ({
+  isCreatingTodo: state.todoView.isCreatingTodo
+})
 
-const mapDispatchToProps = {
-  
-}
+const mapDispatchToProps = (dispatch) => ({
+  createTodo: (todo) => {
+    dispatch(createTodo(todo))
+  }
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(component)
