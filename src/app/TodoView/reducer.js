@@ -1,15 +1,20 @@
-import { TodoActionTypes } from './actions';
+import { ActionTypes } from './actions';
 
 const INITIAL_STATE = {
   isCreatingTodo: false,
+  isGettingTodos: false,
 }
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case TodoActionTypes.CREATE_TODO:
+    case ActionTypes.CREATE_TODO:
       return { ...state, isCreatingTodo: true };
-    case TodoActionTypes.TODO_CREATED:
+    case ActionTypes.SUCCESS_CREATE_TODO:
       return { ...state, isCreatingTodo: false };
+    case ActionTypes.GET_TODOS:
+      return { ...state, isGettingTodos: true };
+    case ActionTypes.SUCCESS_GET_TODOS:
+      return { ...state, isGettingTodos: false }
     default:
       return state;
   }

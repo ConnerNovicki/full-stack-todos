@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types';
 
 class TodoView extends Component {
   render() {
+    console.log(this.props);
     return (
       <div>
         <button
