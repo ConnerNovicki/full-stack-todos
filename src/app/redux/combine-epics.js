@@ -1,6 +1,6 @@
 import { combineEpics } from 'redux-observable';
-import { CreateTodoEpic, GetTodosEpic } from '../TodoView/epics';
+import TodoEpic from '../TodoView/epics';
 
 export default combineEpics(
-  CreateTodoEpic
+  TodoEpic
 );

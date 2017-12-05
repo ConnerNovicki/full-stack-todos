@@ -9,7 +9,6 @@ export default (action$) =>
     ofType(ActionTypes.CREATE_TODO),
     switchMap(action => {
       const { todo } = action.payload;
-      console.log('todo: ', todo);
       return createTodo(action.payload.todo)
         .map(() => successCreateTodo())
         .catch(() => Observable.of(failCreateTodo()))

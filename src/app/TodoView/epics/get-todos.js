@@ -1,6 +1,6 @@
 import { ofType } from 'redux-observable';
-import { ActionTypes, failGetTodods, successGetTodos } from '../actions';
-import { map, delay, switchMap, merge } from 'rxjs/operators';
+import { ActionTypes, failGetTodos, successGetTodos } from '../actions';
+import { map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { getTodos } from '../../external/client';
 
@@ -10,11 +10,9 @@ const todoAction = (action$) =>
     switchMap(action => 
       getTodos()
         .map(() => successGetTodos())
-        .catch(() => Observable.of(failGetTodods()))
+        .catch(() => Observable.of(failGetTodos()))
     )
   );
 
 export default (action$) =>
-  action$.merge(
-    todoAction,
-  )
+  todoAction(action$);

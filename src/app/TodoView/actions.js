@@ -7,9 +7,6 @@ export const ActionTypes = {
   FAIL_GET_TODOS: 'todo.fail-get-todos',
 }
 
-/**
- * @param {*String} todo 
- */
 export const createTodo = (todo) => ({
   type: ActionTypes.CREATE_TODO,
   payload: { todo }
@@ -31,6 +28,6 @@ export const successGetTodos = () => ({
   type: ActionTypes.SUCCESS_GET_TODOS,
 })
 
-export const failGetTodods = () => ({
+export const failGetTodos = () => ({
   type: ActionTypes.FAIL_GET_TODOS,
 })
