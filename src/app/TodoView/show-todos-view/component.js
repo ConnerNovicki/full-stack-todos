@@ -1,32 +1,46 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-
-const defaultState = {
-
-}
+import ListView from '../../shared/list-view/component';
+import { Flex, Box } from 'reflexbox';
+import { styles } from './styles';
 
 class ShowTodosView extends Component {
   constructor(props) {
     super(props);
-    this.state = defaultState;
+    this.renderItemWhenEditMode = this.renderItemWhenEditMode.bind(this);
+    this.renderItemWhenNotEditMode = this.renderItemWhenNotEditMode.bind(this);
+  }
+  renderItemWhenNotEditMode({ name, id, isComplete }) {
+    return (
+      <Flex key={id} w={1} align='center'>
+        <Box w={1/4}>
+          <input type="checkbox" checked={isComplete} onChange={() => this.props.toggleTodoCompletion(id, !isComplete)}/>
+        </Box>
+        <Box w={3/4}>{name}</Box>
+      </Flex>
+    );
   }
 
-  renderTodos() {
-    console.log(this.props.todos);
-    return this.props.todos.map(todo => (
-      <li key={todo.id}>
-        {todo.name}
-      </li>
-    ));
+  renderItemWhenEditMode({ name, id }) {
+    const { deleteTodo } = this.props;
+    return (
+      <Flex w={1} align='center'>
+      <Box key={id} w={3/4}>
+        {name}
+      </Box>
+      <button onClick={() => deleteTodo(id)}>Delete</button>
+    </Flex>
+    );
   }
 
   render() {
-    return (
-      <div>
-        <ol>
-          { this.renderTodos() }
-        </ol>
-      </div>
+    const { isEditModeActive } = this.props;
+    return (     
+      <ListView
+        items={ this.props.todos }
+        renderMethod={ isEditModeActive ?
+          this.renderItemWhenEditMode :
+          this.renderItemWhenNotEditMode }/>
     );
   }
 }
@@ -37,8 +51,10 @@ ShowTodosView.propTypes = {
       name: PropTypes.string.isRequired,
       id: PropTypes.number.isRequired,
     })
-  ),
+  ).isRequired,
+  isEditModeActive: PropTypes.bool,
+  deleteTodo: PropTypes.func.isRequired,
+  toggleTodoCompletion: PropTypes.func.isRequired
 }
-
 
 export default ShowTodosView;

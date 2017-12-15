@@ -14,5 +14,4 @@ const todoAction = (action$) =>
     )
   );
 
-export default (action$) =>
-  todoAction(action$);
+export default (action$) => todoAction(action$);

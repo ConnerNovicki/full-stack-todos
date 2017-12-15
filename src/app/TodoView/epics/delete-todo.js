@@ -1,16 +1,16 @@
 import { ofType } from 'redux-observable';
-import { ActionTypes, failCreateTodo, successCreateTodo  } from '../actions';
+import { ActionTypes, failDeleteTodo, successDeleteTodo  } from '../actions';
 import { map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { createTodo } from '../../external/client';
 
 export default (action$) =>
   action$.pipe(
-    ofType(ActionTypes.CREATE_TODO),
+    ofType(ActionTypes.DELETE_TODO),
     switchMap(action => {
       const { todo } = action.payload;
-      return createTodo(action.payload.todo)
-        .map(() => successCreateTodo())
-        .catch(() => Observable.of(failCreateTodo()))
+      return deleteTodo(action.payload.todo)
+        .map(() => successDeleteTodo())
+        .catch(() => Observable.of(failDeleteTodo()))
       })
     )

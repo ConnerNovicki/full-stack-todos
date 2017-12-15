@@ -1,18 +1,18 @@
 import { connect } from 'react-redux'
 import component from './component'
-import { createTodo } from '../actions';
+import { createTodo, toggleEditMode } from '../actions';
 
 const mapStateToProps = (state, ownProps) => ({
-  isCreatingTodo: state.todoView.isCreatingTodo
+  isCreatingTodo: state.todoView.isCreatingTodo,
+  isEditModeActive: state.todoView.isEditModeActive,
 })
 
 const mapDispatchToProps = (dispatch) => ({
   createTodo: (todoName) => {
-    const todo = {
-      name: todoName,
-      id: 1
-    }
-    dispatch(createTodo(todo))
+    dispatch(createTodo(todoName))
+  },
+  toggleEditMode: () => {
+    dispatch(toggleEditMode())
   }
 })
 
