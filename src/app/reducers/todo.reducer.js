@@ -1,11 +1,10 @@
-import { ActionTypes, FILTER_TYPES } from './actions';
+import { ActionTypes, FILTER_TYPES } from './todo.actions';
 
 const INITIAL_STATE = {
   isCreatingTodo: false,
   isGettingTodos: false,
   isDeleteingTodo: false,
   todos: [],
-  currTodoId: 1,
   isEditModeActive: false,
   filter: FILTER_TYPES.ALL,
 }
@@ -13,20 +12,21 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ActionTypes.CREATE_TODO:
-      const { todoName } = action.payload;
-      const newId = ++state.currTodoId;
+      return state;
+    case ActionTypes.SUCCESS_CREATE_TODO:
       return {
         ...state,
-        isCreatingTodo: true,
-        todos: [ ...state.todos, { name: todoName, id: newId, isComplete: false } ],
-        currTodoId: newId,
+        todos: [...state.todos, action.payload.todo],
+        isCreatingTodo: false
       };
-    case ActionTypes.SUCCESS_CREATE_TODO:
-      return {...state, isCreatingTodo: false };
     case ActionTypes.GET_TODOS:
       return { ...state, isGettingTodos: true };
     case ActionTypes.SUCCESS_GET_TODOS:
-      return { ...state, isGettingTodos: false }
+      return {
+        ...state,
+        todos: action.payload.todos,
+        isGettingTodos: false,
+      }
     case ActionTypes.DELETE_TODO:
       const { id } = action.payload;
       return {
@@ -41,12 +41,12 @@ export default (state = INITIAL_STATE, action) => {
     case ActionTypes.SET_TODOS_FILTER:
       const { filter } = action.payload;
       return { ...state, filter };
-    case ActionTypes.TOGGLE_TODO_COMPLETION:
+    case ActionTypes.UPDATE_TODO:
       return {
         ...state,
         todos: state.todos.map(todo => {
           if (todo.id === action.payload.id) {
-            return { ...todo, isComplete: action.payload.isComplete };
+            return { ...todo, [action.payload.prop]: action.payload.val };
           }
           return todo;
         })

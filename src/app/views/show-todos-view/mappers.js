@@ -1,4 +1,4 @@
-import { FILTER_TYPES } from '../actions';
+import { FILTER_TYPES } from '../../reducers/todo.actions';
 
 export const getFilteredTodos = (todos, filterType) => {
   switch (filterType) {

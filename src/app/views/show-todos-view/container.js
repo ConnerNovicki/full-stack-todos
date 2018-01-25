@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import component from './component'
-import { deleteTodo, toggleTodoCompletion } from '../actions';
+import { deleteTodo, updateTodo } from '../../reducers/todo.actions';
 import { getFilteredTodos } from './mappers';
 
 const mapStateToProps = (state, ownProps) => {
@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(deleteTodo(id));
   },
   toggleTodoCompletion: (id, isComplete) => {
-    dispatch(toggleTodoCompletion(id, isComplete));
+    dispatch(updateTodo(id, 'isComplete', isComplete));
   },
 })
 

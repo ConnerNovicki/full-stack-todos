@@ -34,10 +34,10 @@ class ShowTodosView extends Component {
   }
 
   render() {
-    const { isEditModeActive } = this.props;
+    const { isEditModeActive, todos } = this.props;
     return (     
       <ListView
-        items={ this.props.todos }
+        items={ todos }
         renderMethod={ isEditModeActive ?
           this.renderItemWhenEditMode :
           this.renderItemWhenNotEditMode }/>

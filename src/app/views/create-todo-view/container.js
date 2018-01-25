@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import component from './component'
-import { createTodo, toggleEditMode } from '../actions';
+import { createTodo, toggleEditMode } from '../../reducers/todo.actions';
 
 const mapStateToProps = (state, ownProps) => ({
   isCreatingTodo: state.todoView.isCreatingTodo,
@@ -8,8 +8,8 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  createTodo: (todoName) => {
-    dispatch(createTodo(todoName))
+  createTodo: (todoName, dueDate) => {
+    dispatch(createTodo(todoName, dueDate))
   },
   toggleEditMode: () => {
     dispatch(toggleEditMode())

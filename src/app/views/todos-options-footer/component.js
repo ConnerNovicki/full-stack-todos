@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { Flex, Box } from 'reflexbox';
-import { FILTER_TYPES } from '../actions';
+import { FILTER_TYPES } from '../../reducers/todo.actions';
 
 class ShowTodosView extends Component {
   render() {

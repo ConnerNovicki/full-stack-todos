@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import component from './component'
-import { setTodosFilter } from '../actions';
+import { setTodosFilter } from '../../reducers/todo.actions';
 
 const mapStateToProps = (state, ownProps) => ({
   isEditModeActive: state.todoView.isEditModeActive,

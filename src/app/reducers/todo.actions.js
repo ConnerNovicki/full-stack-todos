@@ -10,7 +10,8 @@ export const ActionTypes = {
   FAIL_GET_TODOS: 'todo.fail-get-todos',
   TOGGLE_EDIT_MODE: 'todo.toggle-edit-mode',
   SET_TODOS_FILTER: 'todo.set-todos-filter',
-  TOGGLE_TODO_COMPLETION: 'todo.toggle-todo-completion',
+  UPDATE_TODO: 'todo.update-todo',
+  SUCCESS_UPDATE_TODO: 'todo.success-update-todo',
 }
 
 export const FILTER_TYPES = {
@@ -19,13 +20,14 @@ export const FILTER_TYPES = {
   INCOMPLETE: 'incomplete',
 }
 
-export const createTodo = (todoName) => ({
+export const createTodo = (todoName, dueDate) => ({
   type: ActionTypes.CREATE_TODO,
-  payload: { todoName }
+  payload: { todoName, dueDate }
 });
 
-export const successCreateTodo = () => ({
+export const successCreateTodo = (todo) => ({
   type: ActionTypes.SUCCESS_CREATE_TODO,
+  payload: { todo }
 });
 
 export const failCreateTodo = () => ({
@@ -49,8 +51,9 @@ export const getTodos = () => ({
   type: ActionTypes.GET_TODOS,
 });
 
-export const successGetTodos = () => ({
+export const successGetTodos = (todos) => ({
   type: ActionTypes.SUCCESS_GET_TODOS,
+  payload: { todos }
 });
 
 export const failGetTodos = () => ({
@@ -66,7 +69,12 @@ export const setTodosFilter = (filter) => ({
   payload: { filter },
 });
 
-export const toggleTodoCompletion = (id, isComplete) => ({
-  type: ActionTypes.TOGGLE_TODO_COMPLETION,
-  payload: { id, isComplete },
+export const updateTodo = (id, prop, val) => ({
+  type: ActionTypes.UPDATE_TODO,
+  payload: { id, prop, val }
+})
+
+export const successUpdateTodo = (todo) => ({
+  type: ActionTypes.SUCCESS_UPDATE_TODO,
+  payload: { todo }
 })
